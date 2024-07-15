@@ -13,15 +13,15 @@ export const listContacts = async () => {
   return JSON.parse(result);
 };
 
-export const getContactById = async (contactId) => {
+export const getContactById = async (id) => {
   const contacts = await listContacts();
-  const result = contacts.find((item) => item.contactId === contactId);
+  const result = contacts.find((item) => item.id === id);
   return result || null;
 };
 
-export const removeContact = async (contactId) => {
+export const removeContact = async (id) => {
   const contacts = await listContacts();
-  const index = contacts.findIndex((item) => item.contactId === contactId);
+  const index = contacts.findIndex((item) => item.id === id);
   if (index === -1) {
     return null;
   }
@@ -33,7 +33,7 @@ export const removeContact = async (contactId) => {
 export const addContact = async (name, email, phone) => {
   const contacts = await listContacts();
   const newContact = {
-    contactId: nanoid(),
+    id: nanoid(),
     name,
     email,
     phone,
